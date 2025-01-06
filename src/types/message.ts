@@ -12,7 +12,9 @@ export type WorldMessage = {
   teamColor: TeamColor
 }
 
+export const TOOL_MESSAGE_PROTO_VER: number = 1
 export type ToolMessage = {
+  version: number
   world: WorldMessage
   data: ToolDataMessage
 }
