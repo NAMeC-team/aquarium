@@ -12,7 +12,7 @@ export type WorldMessage = {
   teamColor: TeamColor
 }
 
-export const TOOL_MESSAGE_PROTO_VER: number = 1
+export const TOOL_MESSAGE_PROTO_VER: number = 2
 export type ToolMessage = {
   version: number
   world: WorldMessage
@@ -21,6 +21,16 @@ export type ToolMessage = {
 
 export type ToolDataMessage = {
   annotations: [[string, Annotation]]
+  commandData: Record<number, CommandData>
+}
+
+export type Vector3 = [number, number, number]
+
+export type CommandData = {
+  orderName: string
+  cmdError: Vector3  // represents last output given
+  target: Vector3
+  cmdTimeMs: number
 }
 
 export enum ToolRequestType {

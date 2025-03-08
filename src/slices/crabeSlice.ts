@@ -19,6 +19,7 @@ export const crabeSlice = createSlice({
         version: action.payload.version,
         world: parseWorld(action.payload.world),
         annotations: convertArrayToObject(action.payload.data.annotations),
+        commandData: action.payload.data.commandData,
       }
     },
   },
