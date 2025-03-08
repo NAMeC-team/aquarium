@@ -4,6 +4,7 @@ import "./Sidebar.css"
 import { useSelector } from "react-redux"
 import { RootState } from "../app/store"
 import { AllyInfo, Robot } from "../types/world"
+import VelocityErrorStats from "./SidebarChildren/VelocityErrorStats";
 
 enum EdisplayMode {
   Robot,
@@ -17,6 +18,8 @@ export function Sidebar() {
   const [allyInfos, setAllyInfos] = useState(
     {} as Record<number, Robot<AllyInfo>>,
   )
+
+  let cmdData = useSelector((state: RootState) => state.crabe.commandData)
 
   function displayContent() {
     switch (displayMode) {
@@ -40,7 +43,9 @@ export function Sidebar() {
           </div>
         )
       case EdisplayMode.Stats:
-        return <div>Stats</div>
+        return Object.entries(cmdData).map(([s_id, _]) => {
+          return <VelocityErrorStats robotId={parseInt(s_id)} />
+        })
       case EdisplayMode.CRAbE:
         return <div>CRAbE</div>
       default:
