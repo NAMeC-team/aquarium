@@ -21,17 +21,10 @@ export type ToolMessage = {
 
 export type ToolDataMessage = {
   annotations: [[string, Annotation]]
-  commandData: Record<number, CommandData>
+  commandTargets: Record<number, Vector3>
 }
 
 export type Vector3 = [number, number, number]
-
-export type CommandData = {
-  orderName: string
-  cmdError: Vector3  // represents last output given
-  target: Vector3
-  cmdTimeMs: number
-}
 
 export enum ToolRequestType {
   Commands = "commands",

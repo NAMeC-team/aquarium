@@ -1,6 +1,6 @@
 import { AllyInfo, Robot, World } from "./world"
 import { Annotation } from "./annotation"
-import { CommandData } from "./message";
+import { Vector3 } from "./message";
 
 /**
  * Represents a global state store for data received from CRAbE
@@ -8,7 +8,7 @@ import { CommandData } from "./message";
 export interface CrabeState {
   world: World,
   annotations: Record<string, Annotation>
-  commandData: Record<number, CommandData>
+  commandTargets: Record<number, Vector3>
 }
 
 export type AquariumState = {

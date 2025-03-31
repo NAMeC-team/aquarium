@@ -19,7 +19,7 @@ export function Sidebar() {
     {} as Record<number, Robot<AllyInfo>>,
   )
 
-  let cmdData = useSelector((state: RootState) => state.crabe.commandData)
+  let cmdTargets = useSelector((state: RootState) => state.crabe.commandTargets)
 
   function displayContent() {
     switch (displayMode) {
@@ -43,7 +43,7 @@ export function Sidebar() {
           </div>
         )
       case EdisplayMode.Stats:
-        return Object.entries(cmdData).map(([s_id, _]) => {
+        return Object.entries(cmdTargets).map(([s_id, _]) => {
           return <VelocityErrorStats robotId={parseInt(s_id)} />
         })
       case EdisplayMode.CRAbE:
