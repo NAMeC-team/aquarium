@@ -13,7 +13,7 @@ import type { AllyInfo, EnemyInfo, Robot } from "../types/world"
 import { TeamColor } from "../types/world"
 import type { Annotation } from "../types/annotation"
 import { AnnotationKind } from "../types/annotation"
-import { RootState, store } from "../app/store"
+import useAquariumStore from "../store/useAquariumStore";
 
 
 function drawGoal(context: CanvasRenderingContext2D, goal: Goal) {
@@ -233,8 +233,7 @@ export function drawBot(
       ally.pose.position[1],
       ally.pose.orientation,
     )
-    const state: RootState = store.getState();
-    const clickedRobot = state.aquarium.clickedRobot;
+    const clickedRobot = useAquariumStore.getState().clickedRobot;
     if (clickedRobot && clickedRobot.id === ally.id) {
       context.lineWidth = 0.03
       context.beginPath()

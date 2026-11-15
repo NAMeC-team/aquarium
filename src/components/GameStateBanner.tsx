@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
-import { RootState } from "../app/store"
 import "./GameStateBanner.css"
+import useCrabeStore from "../store/useCrabeStore";
 
 type StateInfo = {
   mainState: string
@@ -14,8 +13,7 @@ export function GameStateBanner() {
     subState: "no state",
   })
 
-  const world = useSelector((state: RootState) => state.crabe.world)
-
+  const world = useCrabeStore((state) => state.world)
   function toUppercaseWithSpaces(wholeWord: string): string {
     return wholeWord?.match(/([A-Z]|[a-z])[a-z]+/g)
       ?.map((word: string, idx: number): string => {

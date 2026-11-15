@@ -1,12 +1,11 @@
 import { Ref, useEffect, useRef, useState } from "react"
 import "./Scoreboard.css"
-import { useSelector } from "react-redux"
-import { RootState } from "../app/store"
 import { World } from "../types/world";
+import useCrabeStore from "../store/useCrabeStore";
 
 export function Scoreboard() {
   const scoreboardRef: Ref<HTMLDivElement> = useRef(null)
-  let world = useSelector((state: RootState) => state.crabe.world)
+  let world = useCrabeStore((state) => state.world)
 
   let [nameTeamAlly, setNameTeamAlly] = useState("/!\\")
   let [nameTeamEnemy, setNameTeamEnemy] = useState("/!\\")
