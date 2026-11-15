@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react"
 import RobotDataCard from "./SidebarChildren/RobotDataCard"
 import "./Sidebar.css"
-import { useSelector } from "react-redux"
-import { RootState } from "../app/store"
 import { AllyInfo, Robot } from "../types/world"
+import useCrabeStore from "../store/useCrabeStore";
 
 enum EdisplayMode {
   Robot,
@@ -12,7 +11,7 @@ enum EdisplayMode {
 }
 
 export function Sidebar() {
-  let world = useSelector((state: RootState) => state.crabe.world)
+  let world = useCrabeStore((state) => state.world)
   const [displayMode, setDisplayMode] = useState(EdisplayMode.Robot)
   const [allyInfos, setAllyInfos] = useState(
     {} as Record<number, Robot<AllyInfo>>,

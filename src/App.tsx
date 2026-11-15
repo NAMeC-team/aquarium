@@ -3,8 +3,11 @@ import { FieldView } from "./components/FieldView"
 import { Scoreboard } from "./components/Scoreboard"
 import { Sidebar } from "./components/Sidebar"
 import { GameStateBanner } from "./components/GameStateBanner"
+import { startWebsocketConnection } from "./app/websocketConnection";
 
 function App() {
+  startWebsocketConnection()
+
   return (
     <div className="App">
       <main>

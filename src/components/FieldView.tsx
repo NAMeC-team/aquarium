@@ -1,13 +1,12 @@
 import { Ref, useEffect, useRef, useState } from "react"
-import { useSelector } from "react-redux"
-import { RootState, store } from "../app/store"
 import { drawAnnotation, drawBall, drawBot, drawFieldHorizontal } from "../field/field"
 import { Field } from "../types/geometry"
-import { setClickedBot } from "../slices/aquariumSlice"
+import useCrabeStore from "../store/useCrabeStore";
+import useAquariumStore from "../store/useAquariumStore";
 
 export function FieldView() {
-  const world = useSelector((state: RootState) => state.crabe.world)
-  const annotation = useSelector((state: RootState) => state.crabe.annotations)
+  const world = useCrabeStore((state) => state.world)
+  const annotation = useCrabeStore((state) => state.annotations)
 
   const canvasRef: Ref<HTMLCanvasElement> = useRef<HTMLCanvasElement>(null)
 
@@ -19,17 +18,19 @@ export function FieldView() {
     const scale_factor = (canvas.width / field.length + canvas.height / field.width) / 2.1
     const field_clicked_x = x_clicked / scale_factor
     const field_clicked_y = -y_clicked / scale_factor
+    const setClickedBot = useAquariumStore((state) => state.setClickedRobot)
 
     // check for each ally if the click is on it
     for (const bot of Object.values(world.alliesBot)) {
       if (Math.abs(bot.pose.position[0] - field_clicked_x) < world.geometry.robotRadius 
           && Math.abs(bot.pose.position[1] - field_clicked_y) < world.geometry.robotRadius) {
-        store.dispatch(setClickedBot(bot))
+        setClickedBot(bot)
         return
       }
     }
-    store.dispatch(setClickedBot(null))
-  } 
+
+    setClickedBot(null)
+  }
 
   function initCanvas(context: CanvasRenderingContext2D, field: Field, horizontal : boolean) {
 
